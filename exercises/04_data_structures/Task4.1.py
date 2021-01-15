@@ -25,35 +25,24 @@ print('Intersection4.5:',sorted(command1.intersection(command2)))
 #4.6--------------------------------------------------
 
 ospf_route = "       10.0.24.0/24 [110/41] via 10.0.13.3, 3d18h, FastEthernet0/0"
-ospf_keys=['Prefix','AD/Metric','Next-Hop','Last update','Outbound Interface']
-ospf=dict.fromkeys(ospf_keys) 
+route = ospf_route.replace(",", " ").replace("[", "").replace("]", "")
+route = route.split()
+output = "\n{:25} {}" * 5
+print(output.format("Prefix", route[0],"AD/Metric", route[1],"Next-Hop",
+ route[3],"Last update", route[4],"Outbound Interface", route[5],))                   
 
-ospf['Prefix']=ospf_route.split()[0]  
-ospf['AD/Metric']=ospf_route.split()[1] 
-ospf['Next-Hop']=ospf_route.split()[3] 
-ospf['Last update']=ospf_route.split()[4] 
-ospf['Outbound Interface']=ospf_route.split()[5]
-print('Dict4.6:',ospf)
-ospf_form=''' 
-Prefix                {0} 
-AD/Metric             {1} 
-Next-Hop              {2} 
-Last update           {3} 
-Outbound Interface    {4} 
-'''                      
-ospf_f=ospf_form.format(ospf_route.split()[0],ospf_route.split()[1],ospf_route.split()[2],ospf_route.split()[3],ospf_route.split()[4])
-print(ospf_f)
 #4.7----------------------------------------------------------------
+print('\n')
 mac = "AAAA:BBBB:CCCC"
 macs=mac.replace(':','') 
 int(macs,16)
-print('macbin4.7:',bin(int(macs,16)))
+print('macbin4.7:',bin(int(macs,16))[2:])
 #4.8-----------------------------------------
 ip = "192.168.3.1"
 ips=ip.split('.') 
 ip_format='''ip address: 
 {0:<8} {1:<8} {2:<8} {3:<8} 
-{0:<8b} {1:<8b} {2:<8b} {3:<8b} 
+{0:08b} {1:08b} {2:08b} {3:08b} 
 '''   
 form=ip_format.format(int(ips[0]),int(ips[1]),int(ips[2]),int(ips[3]))
 print(form)
